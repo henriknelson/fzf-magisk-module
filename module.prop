@@ -1,0 +1,6 @@
+id=fzf-nelshh
+name=fzf for Android
+version=0.22.0
+versionCode=1
+author=nelshh
+description=A statically built version of fzf for android (aarch64)
