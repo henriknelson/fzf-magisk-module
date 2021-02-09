@@ -6,6 +6,12 @@ This Magisk module installs the latest stable version of fzf to the target syste
 
 ## Change Log
 
+### v1.2 - 2021-02-09
+* Updated fzf to v. 0.25.1
+
+### v1.1 - 2020-10-30
+* Updated fzf to v. 0.24.1
+
 ### v1.0 - 2020-10-16
 * Initial release
 

@@ -1,0 +1,32 @@
+#!/system/bin/sh
+##
+# Interactive search. Usage: `ff` or `ff`
+# <folder>`.
+#
+
+dir=`readlink -f "$1"`
+[[ -n "$dir" ]] && cd "$dir" # go to provided folder or noop
+RG_DEFAULT_COMMAND="rg -i -l -a --hidden --no-ignore-vcs --sort path"
+
+#FZF_DEFAULT_COMMAND="rg --sort path --binary --no-ignore --files" fzf \
+
+selected=$(
+FZF_DEFAULT_COMMAND="rg --files" fzf \
+  	-m \
+	-e \
+	--ansi \
+	--no-height\
+	--phony \
+	--reverse \
+	--info "hidden" \
+	--bind "pgdn:preview-page-down,pgup:preview-page-up" \
+  	--bind "ctrl-a:select-all" \
+	--bind "f12:execute-silent:(subl -b {})" \
+  	--bind "change:reload:clear;$RG_DEFAULT_COMMAND {q} || true" \
+	--preview "bat --style=plain --color=always -p --language=sh --line-range :300 {}" \
+	--preview-window down:75%:border \
+	--color 'border:#778899'
+)
+
+[[ -n $selected ]] && filename="$selected";[[ -f "$filename" ]] && nano "$filename"
+clear

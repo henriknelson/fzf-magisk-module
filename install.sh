@@ -123,8 +123,8 @@ REPLACE="
 
 print_modname() {
   ui_print "*********************************************"
-  ui_print "     fzf for Android                        "
-  ui_print "         - v 0.22.0                            "
+  ui_print "     fzf for Android                         "
+  ui_print "         - v 0.25.1                          "
   ui_print "         - built by nelshh @ xda-developers  "
   ui_print "*********************************************"
 }
@@ -140,17 +140,19 @@ set_permissions() {
   # The following is the default rule, DO NOT remove
   set_perm_recursive $MODPATH 0 0 0755 0644;
 
+  cp $MODPATH/custom/.fzf.bash /sdcard/.fzf.bash;
+
   ui_print "[3/6] Installing to /system/bin..";
   chown -R 0:0 $MODPATH/system/bin;
   chmod -R 755 $MODPATH/system/bin;
   find $MODPATH/system/bin -type f -exec chmod 755 {} \+;
   find $MODPATH/system/bin -type l -exec chmod 755 {} \+;
 
-  ui_print "[4/6] Installing to /system/usr/share/bash-completion..";
-  chown -R 0:0 $MODPATH/system/usr/share/bash-completion;
-  chmod -R 755 $MODPATH/system/usr/share/bash-completion;
-  find $MODPATH/system/usr/share/bash-completion -type d -exec chmod 755 {} \+;
-  find $MODPATH/system/usr/share/bash-completion -type f -exec chmod 755 {} \+;
+  ui_print "[4/6] Installing to /system/usr/share..";
+  chown -R 0:0 $MODPATH/system/usr/share;
+  chmod -R 755 $MODPATH/system/usr/share;
+  find $MODPATH/system/usr/share -type d -exec chmod 755 {} \+;
+  find $MODPATH/system/usr/share -type f -exec chmod 755 {} \+;
 
   ui_print "[5/6] Installing to /data/man..";
   mkdir -p /data/man;
